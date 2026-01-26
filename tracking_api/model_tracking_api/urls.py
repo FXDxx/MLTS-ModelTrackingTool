@@ -1,9 +1,6 @@
 from rest_framework.routers import DefaultRouter
-from .views import (DatasetsViewSet, ExperimentViewSet,
-                    HyperparametersViewSet, MetricsViewSet, ModelArtifactsViewSet)
+from .views import MLModelViewSet
 
 router = DefaultRouter()
-router.register(r'models', ExperimentViewSet, basename='model')
-router.register(r'hyperparameters', HyperparametersViewSet, basename='hyperparameter')
-router.register(r'metrics', MetricsViewSet, basename='metric')
+router.register(r'models', MLModelViewSet, basename='model')
 urlpatterns = router.urls
