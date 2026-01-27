@@ -10,15 +10,14 @@ class MLModelViewSet(ModelViewSet):
     queryset = MLModels.objects.all()
     serializer_class = MLModelsSerializer
 
-    #try:
-    #    @action(detail=False, methods=['get'], url_path='parameters/(?P<model_type>[^/.]+)')
-    #    def get_parameters(self, request, model_type=None):
-    #        params = MODEL_PARAMETER_SCHEMA.get(model_type)
+    try:
+        @action(detail=False, methods=['get'], url_path='parameters/(?P<model_type>[^/.]+)')
+        def get_parameters(self, request, model_type=None):
+            params = MODEL_PARAMETER_SCHEMA.get(model_type)
+            if not params:
+                return Response({"error": "Invalid model type"}, status=400)
 
-    #        if not params:
-    #            return Response({"error": "Invalid model type"}, status=400)
-
-    #       return Response({"parameters": list(params.keys())})
-    #except Exception as e:
-    #    print(f":{e}")
+            return Response({"parameters": list(params.keys())})
+    except Exception as e:
+        print(f":{e}")
         
