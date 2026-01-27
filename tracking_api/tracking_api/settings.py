@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'dataset_tracking_api',
     'model_tracking_api',
+    'model_inference_api',
 ]
 
 MIDDLEWARE = [

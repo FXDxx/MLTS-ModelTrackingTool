@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataset_tracking_api.urls')),
     path('api/', include('model_tracking_api.urls')),
+    path('api/', include('model_inference_api.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
