@@ -9,6 +9,7 @@ from .ml_registry import MODEL_PARAMETER_SCHEMA
 class MLModelViewSet(ModelViewSet):
     queryset = MLModels.objects.all()
     serializer_class = MLModelsSerializer
+    lookup_field = 'model_name'
 
     @action(detail=False, methods=['get'], url_path='parameters/(?P<model_type>[^/.]+)')
     def get_parameters(self, request, model_type=None):
