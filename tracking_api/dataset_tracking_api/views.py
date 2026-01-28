@@ -6,13 +6,10 @@ from .models import Datasets
 from .serializers import DatasetsSerializer
 # Create your views here.
 class DatasetsViewSet(viewsets.ModelViewSet):
-    try:
+    
         queryset = Datasets.objects.all().order_by('-created_at')
         serializer_class = DatasetsSerializer
-    except Exception as e:
-        print(f"No serialized class is recognized:{e}")
-
-    try:
+  
         def perform_create(self, serializer): #perform_create() is a built-in hook in DRF’s CreateModelMixin. It is called automatically on POST.
             fileObj = self.request.FILES['document']
             if not fileObj:
@@ -35,7 +32,6 @@ class DatasetsViewSet(viewsets.ModelViewSet):
             version = latest.version +1
 
             serializer.save(hash=file_hash, version=version)
-    except Exception as e:
-        print(f"dataset hashing and version does not occur, can lead to duplicate data: {e}")
+  
 
 
