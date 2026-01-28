@@ -4,12 +4,19 @@ from rest_framework.response import Response
 from .models import MLModels
 from .serializers import MLModelsSerializer
 from .ml_registry import MODEL_PARAMETER_SCHEMA
+from rest_framework.pagination import PageNumberPagination
 # Create your views here.
+
+class SmallPagePagination(PageNumberPagination):
+    page_size=5
+    page_size_query_param='page_size'
+    max_page_size=10
 
 class MLModelViewSet(ModelViewSet):
     queryset = MLModels.objects.all()
     serializer_class = MLModelsSerializer
     lookup_field = 'model_name'
+    pagination_class = SmallPagePagination
 
     @action(detail=False, methods=['get'], url_path='parameters/(?P<model_type>[^/.]+)')
     def get_parameters(self, request, model_type=None):
